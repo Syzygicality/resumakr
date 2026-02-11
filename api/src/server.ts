@@ -1,14 +1,12 @@
 import 'dotenv/config';
 import Fastify from 'fastify';
 import mongoPlugin from './plugins/mongo';
+import pingRoutes from './routes/ping.route';
 
 const app = Fastify({ logger: true });
 
 app.register(mongoPlugin);
-
-app.get('/ping', async (request, reply) => {
-    return { message: "PONG" };
-});
+app.register(pingRoutes);
 
 const start = async () => {
     try {

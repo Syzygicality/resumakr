@@ -1,4 +1,5 @@
 import { FastifyRequest, FastifyReply } from 'fastify';
+import { BaseUser } from '../schemas/auth.schema';
 
 export async function ping(
   request: FastifyRequest,
@@ -11,9 +12,6 @@ export async function pingAuth(
   request: FastifyRequest,
   reply: FastifyReply
 ) {
-  // Auth0 adds the validated token claims to request.user
-  return reply.send({
-    message: 'PONG (protected)',
-    user: request.user
-  });
+  const user = await request.server.mongo.db?.collection<BaseUser>("users").findOne({_id: request.user.sub});
+  return reply.send({message: 'PONG (protected)', me: user});
 }

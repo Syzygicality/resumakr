@@ -1,4 +1,6 @@
 import { FastifyInstance, FastifyReply, FastifyRequest } from 'fastify';
+import { jwtDecode } from "jwt-decode";
+import { BaseUser } from '../schemas/auth.schema';
 
 interface CallbackQuery {
   code: string;
@@ -36,8 +38,24 @@ export default async function authRoutes(app: FastifyInstance) {
         redirect_uri: process.env.AUTH0_CALLBACK_URL,
         }),
     });
-
     const tokens = await response.json();
+
+    const idToken: any = jwtDecode(tokens.id_token);
+
+    const users = request.server.mongo.db!.collection<BaseUser>("users");
+    const user = await users.findOne({ _id : idToken.sub });
+
+    if (!user) {
+      await users.insertOne(
+        {
+          _id: idToken.sub!,
+          name: idToken.name,
+          email: idToken.email, 
+          creation_date: new Date(),
+          onboarded: false,
+        }
+      )
+    }
 
     reply.send(tokens);
     });

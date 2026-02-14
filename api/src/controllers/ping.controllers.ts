@@ -1,5 +1,5 @@
 import { FastifyRequest, FastifyReply } from 'fastify';
-import { BaseUser } from '../schemas/auth.schema';
+import { BaseUser } from '../types/auth.types';
 
 export async function ping(
   request: FastifyRequest,

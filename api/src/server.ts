@@ -2,8 +2,8 @@ import 'dotenv/config';
 import Fastify from 'fastify';
 import mongoPlugin from './plugins/mongo';
 import authPlugin from './plugins/auth';
-import pingRoutes from './routes/ping.route';
-import authRoutes from './routes/auth.route';
+import pingRoutes from './routes/ping.routes';
+import authRoutes from './routes/auth.routes';
 
 const app = Fastify({ logger: true });
 

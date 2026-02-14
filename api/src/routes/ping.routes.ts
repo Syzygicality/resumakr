@@ -1,6 +1,6 @@
 import { FastifyInstance } from 'fastify';
-import { ping, pingAuth } from '../controllers/ping.controller';
-import { pingSchema } from '../schemas/ping.schema';
+import { ping, pingAuth } from '../controllers/ping.controllers';
+import { pingSchema } from '../schemas/ping.schemas';
 
 export default async function pingRoutes(app: FastifyInstance) {
   app.get(

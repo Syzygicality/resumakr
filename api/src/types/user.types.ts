@@ -55,7 +55,7 @@ interface EducationSubsection {
 
 interface BaseSection {
     _id: ObjectId;
-    type: "skills";
+    type: "skills" | "profile" | "experience" | "projects" | "education";
     header?: string;
 }
 
@@ -71,7 +71,7 @@ interface ExperienceSection extends BaseSection {
     experience: ExperienceSubsection[];
 }
 
-interface ProjectSection extends BaseSection {
+interface ProjectsSection extends BaseSection {
     projects: ProjectSubsection[];
 }
 
@@ -79,12 +79,41 @@ interface EducationSection extends BaseSection {
     education: EducationSubsection[];
 }
 
+interface ResumeItem {
+    _id: ObjectId;
+    ref: ObjectId;
+}
+
+interface ResumeList {
+    _id: ObjectId;
+    items: ResumeItem[];
+}
+
+interface ResumeSubsection {
+    _id: ObjectId;
+    ref: ObjectId;
+    primaryItems: ResumeList[];
+    secondaryItems?: ResumeList[];
+}
+
+interface ResumeSection {
+    _id: ObjectId;
+    ref: ObjectId;
+    subsections: ResumeSubsection[];
+}
+
+interface Resume {
+    _id: ObjectId;
+    resumeSections: ResumeSection[];
+}
+
 export interface User {
     _id: string;
     name: string;
-    preferred_name?: string;
+    preferredName?: string;
     email: string;
     phoneNumber?: string;
     links: Link[];
     sections: BaseSection[]
+    resumes: Resume[]
 }

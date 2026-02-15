@@ -2,13 +2,15 @@ import { User } from "../types/user.types";
 
 import { Db } from "mongodb";
 
-export async function getUser(db: Db, sub: string) {
+export async function getUserCollection(db: Db, sub: string) {
     return await db.collection<User>("users").findOne({ _id: sub })
 }
 
-export async function deleteUser(db: Db, sub: string) {
+export async function deleteUserCollection(db: Db, sub: string) {
     await db.collection<User>("users").deleteOne({ _id: sub });
-    
+}
+
+export async function deleteUserAuth0(sub: string) {
     const tokenRes = await fetch(`https://${process.env.AUTH0_DOMAIN}/oauth/token`, {
         method: "POST",
         headers: { "Content-Type": "application/json" },
@@ -20,9 +22,7 @@ export async function deleteUser(db: Db, sub: string) {
         }),
     });
 
-    if (!tokenRes.ok) {
-        throw new Error("Failed to obtain Auth0 management token");
-    }
+    if (!tokenRes.ok) throw new Error("Failed to obtain Auth0 management token");
 
     const { access_token } = await tokenRes.json();
 
@@ -36,9 +36,5 @@ export async function deleteUser(db: Db, sub: string) {
         }
     );
 
-    if (!deleteRes.ok) {
-        throw new Error("Failed to delete Auth0 user");
-    }
-
-    return { success: true };
+    if (!deleteRes.ok) throw new Error("Failed to delete Auth0 user");
 }

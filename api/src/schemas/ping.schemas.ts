@@ -3,7 +3,8 @@ export const pingSchema = {
         200: {
             type: 'object',
             properties: {
-                message: { type: 'string' }
+                message: { type: 'string' },
+                foo: { type: 'string', optional: true }
             }
         }
     }

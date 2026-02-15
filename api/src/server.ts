@@ -13,8 +13,8 @@ app.register(mongoPlugin);
 app.register(authPlugin);
 
 app.register(pingRoutes, { prefix: "/ping" });
-app.register(authRoutes, {  prefix: "/auth" });
-app.register(userRoutes, {  prefix: "/user" });
+app.register(authRoutes, { prefix: "/auth" });
+app.register(userRoutes, { prefix: "/user" });
 
 const start = async () => {
     try {

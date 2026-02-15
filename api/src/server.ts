@@ -1,17 +1,20 @@
-import 'dotenv/config';
-import Fastify from 'fastify';
 import mongoPlugin from './plugins/mongo';
 import authPlugin from './plugins/auth';
 import pingRoutes from './routes/ping.routes';
 import authRoutes from './routes/auth.routes';
+import userRoutes from './routes/user.routes';
+
+import 'dotenv/config';
+import Fastify from 'fastify';
 
 const app = Fastify({ logger: true });
 
 app.register(mongoPlugin);
 app.register(authPlugin);
 
-app.register(pingRoutes);
-app.register(authRoutes);
+app.register(pingRoutes, { prefix: "/ping" });
+app.register(authRoutes, {  prefix: "/auth" });
+app.register(userRoutes, {  prefix: "/user" });
 
 const start = async () => {
     try {

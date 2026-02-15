@@ -20,21 +20,6 @@ interface SkillList {
     skills: Item[];
 }
 
-interface SkillSection {
-    _id: ObjectId;
-    type: "skills";
-    header?: string;
-    skills: SkillList[];
-}
-
-interface ProfileSection {
-    _id: ObjectId;
-    type: "profile";
-    header?: string;
-    profile: Item[];
-
-}
-
 interface ExperienceSubsection {
     _id: ObjectId;
     title: string;
@@ -43,13 +28,6 @@ interface ExperienceSubsection {
     startDate: Date;
     endDate?: Date;
     bulletPoints: Item[];
-}
-
-interface ExperienceSection {
-    _id: ObjectId;
-    type: "experience";
-    header?: string;
-    experience: ExperienceSubsection[];
 }
 
 interface ProjectSubsection {
@@ -61,13 +39,6 @@ interface ProjectSubsection {
     endDate?: Date;
     link?: Link;
     bulletPoints: Item[];
-}
-
-interface ProjectSection {
-    _id: ObjectId;
-    type: "projects";
-    header?: string;
-    projects: ProjectSubsection[];
 }
 
 interface EducationSubsection {
@@ -82,9 +53,29 @@ interface EducationSubsection {
 
 }
 
-interface EducationSection {
+interface BaseSection {
     _id: ObjectId;
-    type: "education";
+    type: "skills";
+    header?: string;
+}
+
+interface SkillSection extends BaseSection {
+    skills: SkillList[];
+}
+
+interface ProfileSection extends BaseSection {
+    profile: Item[];
+}
+
+interface ExperienceSection extends BaseSection {
+    experience: ExperienceSubsection[];
+}
+
+interface ProjectSection extends BaseSection {
+    projects: ProjectSubsection[];
+}
+
+interface EducationSection extends BaseSection {
     education: EducationSubsection[];
 }
 
@@ -95,5 +86,5 @@ export interface User {
     email: string;
     phoneNumber?: string;
     links: Link[];
-    sections: (SkillSection | ProfileSection | ExperienceSection | ProjectSection | EducationSection)[]
+    sections: BaseSection[]
 }

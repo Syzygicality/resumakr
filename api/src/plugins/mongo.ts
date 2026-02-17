@@ -3,9 +3,7 @@ import fastifyMongo from '@fastify/mongodb';
 import { FastifyInstance } from 'fastify';
 
 const mongoPlugin = fp(async (app: FastifyInstance) => {
-    if (!process.env.MONGO_URL) {
-        throw new Error('MONGO_URL environment variable not defined');
-    }
+    if (!process.env.MONGO_URL) throw new Error('MONGO_URL environment variable not defined');
     await app.register(fastifyMongo, {
         url: process.env.MONGO_URL,
     });

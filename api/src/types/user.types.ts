@@ -113,7 +113,8 @@ export interface User {
     preferredName?: string;
     email: string;
     phoneNumber?: string;
+    creationDate: Date;
     links: Link[];
-    sections: BaseSection[]
-    resumes: Resume[]
+    sections: BaseSection[];
+    resumes: Resume[];
 }

@@ -1,4 +1,5 @@
-import { BaseUser, IdToken } from "../types/auth.types";
+import { IdToken } from "../types/auth.types";
+import { User } from "../types/user.types";
 
 import { Db } from "mongodb";
 
@@ -17,17 +18,20 @@ export async function getTokens(code: string) {
     return await response.json()
 }
 
-export async function checkNewUser(db: Db, idToken: IdToken) {
-    const users = db.collection<BaseUser>("users");
-    const user = await users.findOne({ _id : idToken.sub });
-
-    if (!user) {
-        await users.insertOne({
-            _id: idToken.sub!,
-            name: idToken.name,
-            email: idToken.email, 
-            creation_date: new Date(),
-            onboarded: false,
-        });
+const newUserFactory = (sub: string, name: string, email: string) => {
+    return {
+        _id: sub,
+        name: name,
+        email: email, 
+        creationDate: new Date(),
+        links: new Array(),
+        sections: new Array(),
+        resumes: new Array()
     }
+}
+
+export async function checkNewUser(db: Db, idToken: IdToken) {
+    const users = db.collection<User>("users");
+    const user = await users.findOne({ _id : idToken.sub });
+    if (!user) await users.insertOne(newUserFactory(idToken.sub!, idToken.name, idToken.email));
 }

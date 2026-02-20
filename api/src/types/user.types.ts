@@ -5,6 +5,7 @@ interface Item {
     itemType: string;
     itemName: string;
     starred: boolean;
+    tags: string[];
 }
 
 interface Link {
@@ -18,6 +19,7 @@ interface SkillList {
     _id: ObjectId;
     listName: string;
     skills: Item[];
+    tags: string[];
 }
 
 interface ExperienceSubsection {
@@ -28,6 +30,7 @@ interface ExperienceSubsection {
     startDate: Date;
     endDate?: Date;
     bulletPoints: Item[];
+    tags: string[];
 }
 
 interface ProjectSubsection {
@@ -39,6 +42,7 @@ interface ProjectSubsection {
     endDate?: Date;
     link?: Link;
     bulletPoints: Item[];
+    tags: string[];
 }
 
 interface EducationSubsection {
@@ -50,7 +54,7 @@ interface EducationSubsection {
     endDate: Date;
     coursework?: Item[];
     gpa?: number;
-
+    tags: string[];
 }
 
 interface BaseSection {
@@ -114,6 +118,7 @@ export interface User {
     email: string;
     phoneNumber?: string;
     creationDate: Date;
+    tags: string[];
     links: Link[];
     sections: BaseSection[];
     resumes: Resume[];

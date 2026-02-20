@@ -24,17 +24,11 @@ export async function callbackController(request: FastifyRequest<{ Querystring: 
 
     await checkNewUser(request.server.mongo.db!, jwtDecode<IdToken>(tokens.id_token));
 
-    console.log(tokens.access_token);
-    console.log(tokens.id_token);
-
-    reply.code(200).send({
-        accessToken: tokens.access_token,
-        idToken: tokens.id_token,
-    });
+    reply.code(200).send({accessToken: tokens.access_token, idToken: tokens.id_token});
 }
 
 export async function logoutController(request: FastifyRequest, reply: FastifyReply) {
-    const returnTo = encodeURIComponent(process.env.APP_BASE_URL || "http://localhost:3000/login");
+    const returnTo = encodeURIComponent(process.env.APP_BASE_URL || "http://localhost:3000/auth/login");
 
     const logoutUrl = `https://${process.env.AUTH0_DOMAIN}/v2/logout?client_id=${process.env.AUTH0_CLIENT_ID}&returnTo=${returnTo}`;
 

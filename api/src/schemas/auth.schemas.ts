@@ -1,4 +1,6 @@
-export const tokenSchema = {
+import { FastifySchema } from "fastify"
+
+export const tokenSchema: FastifySchema = {
     response: {
         200: {
             type: 'object',

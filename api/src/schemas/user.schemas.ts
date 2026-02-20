@@ -1,13 +1,16 @@
-export const mirrorSchema = {
+import { FastifySchema } from "fastify"
+
+export const mirrorSchema: FastifySchema = {
     response: {
         200: {
             type: 'object',
             properties: {
                 name: { type: 'string' },
-                preferredName: { type: 'string', optional: true },
+                preferredName: { type: 'string' },
                 email: { type: 'string' },
-                phoneNumber: { type: 'string', optional: true },
-            }
+                phoneNumber: { type: 'string' },
+            },
+            required: ['name', 'email']
         }
     }
 }

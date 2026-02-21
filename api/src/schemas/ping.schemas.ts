@@ -6,7 +6,6 @@ export const pingSchema: FastifySchema = {
             type: 'object',
             properties: {
                 message: { type: 'string' },
-                foo: { type: 'string', optional: true }
             }
         }
     }

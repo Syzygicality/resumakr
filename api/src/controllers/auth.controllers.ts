@@ -1,18 +1,13 @@
 import { CallbackQuery, IdToken } from '../types/auth.types';
+import { checkNewUser } from '../services/auth.services';
+import { loginUrl, getTokens, logoutUrl } from '../helpers/auth.client';
 
 import { FastifyReply, FastifyRequest } from 'fastify';
 import { jwtDecode } from "jwt-decode";
-import { checkNewUser, getTokens } from '../services/auth.services';
+
 
 export async function loginController(request: FastifyRequest, reply: FastifyReply ) {
-    const params = new URLSearchParams({
-        client_id: process.env.AUTH0_CLIENT_ID!,
-        response_type: 'code',
-        scope: 'openid profile email',
-        redirect_uri: process.env.AUTH0_CALLBACK_URL!,
-        audience: process.env.AUTH0_AUDIENCE!,
-    }); 
-    return reply.redirect(`https://${process.env.AUTH0_DOMAIN}/authorize?${params.toString()}`);
+    return reply.redirect(loginUrl);
 }
 
 export async function callbackController(request: FastifyRequest<{ Querystring: CallbackQuery }>, reply: FastifyReply) {
@@ -28,9 +23,5 @@ export async function callbackController(request: FastifyRequest<{ Querystring: 
 }
 
 export async function logoutController(request: FastifyRequest, reply: FastifyReply) {
-    const returnTo = encodeURIComponent(process.env.APP_BASE_URL || "http://localhost:3000/auth/login");
-
-    const logoutUrl = `https://${process.env.AUTH0_DOMAIN}/v2/logout?client_id=${process.env.AUTH0_CLIENT_ID}&returnTo=${returnTo}`;
-
     reply.redirect(logoutUrl);
 }

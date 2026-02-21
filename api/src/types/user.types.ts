@@ -123,3 +123,7 @@ export interface User {
     sections: BaseSection[];
     resumes: Resume[];
 }
+
+export type UserPatch = Partial<
+  Pick<User, 'name' | 'preferredName' | 'email' | 'phoneNumber'>
+>;

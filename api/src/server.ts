@@ -3,6 +3,7 @@ import authPlugin from './plugins/auth';
 import pingRoutes from './routes/ping.routes';
 import authRoutes from './routes/auth.routes';
 import userRoutes from './routes/user.routes';
+import linkRoutes from './routes/link.routes';
 
 import 'dotenv/config';
 import Fastify from 'fastify';
@@ -15,6 +16,7 @@ app.register(authPlugin);
 app.register(pingRoutes, { prefix: "/ping" });
 app.register(authRoutes, { prefix: "/auth" });
 app.register(userRoutes, { prefix: "/user" });
+app.register(linkRoutes, { prefix: "/links"})
 
 const start = async () => {
     try {

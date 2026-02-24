@@ -8,10 +8,10 @@ interface Item {
     tags: string[];
 }
 
-interface Link {
+export interface Link {
     _id: ObjectId;
-    linkType: string;
-    linkName: string;
+    linkType: "contact" | "project";
+    linkName?: string;
     link: string;
 }
 
@@ -111,6 +111,15 @@ interface Resume {
     resumeSections: ResumeSection[];
 }
 
+interface APIKey {
+    _id: ObjectId;
+    hash: string;
+    iv: string;
+    authTag: string;
+    created_at: Date;
+    disabled: boolean;
+}
+
 export interface User {
     _id: string;
     name: string;
@@ -122,8 +131,9 @@ export interface User {
     links: Link[];
     sections: BaseSection[];
     resumes: Resume[];
+    APIKey?: APIKey;
 }
 
 export type UserPatch = Partial<
-  Pick<User, 'name' | 'preferredName' | 'email' | 'phoneNumber'>
+    Pick<User, 'name' | 'preferredName' | 'email' | 'phoneNumber' >
 >;

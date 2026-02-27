@@ -1,5 +1,5 @@
 import { deleteUser, getManagementTokens } from "../helpers/auth.client";
-import { User, UserPatch } from "../types/user.types";
+import { User, UserPatch } from "../user/user.types";
 
 import { Db } from "mongodb";
 

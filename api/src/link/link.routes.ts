@@ -1,4 +1,4 @@
-import * as linkController from "../controllers/link.controllers";
+import * as linkController from "./link.controllers";
 
 import { FastifyInstance } from "fastify";
 

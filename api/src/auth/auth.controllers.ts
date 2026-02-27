@@ -1,4 +1,4 @@
-import { CallbackQuery, IdToken } from '../types/auth.types';
+import { CallbackQuery, IdToken } from '../auth/auth.types';
 import { checkNewUser } from '../services/auth.services';
 import { loginUrl, getTokens, logoutUrl } from '../helpers/auth.client';
 

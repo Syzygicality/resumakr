@@ -1,5 +1,5 @@
 import * as userService from '../services/user.services';
-import { UserPatch } from '../types/user.types';
+import { UserPatch } from './user.types';
 
 import { FastifyRequest, FastifyReply } from 'fastify';
 

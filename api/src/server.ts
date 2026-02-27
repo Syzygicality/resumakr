@@ -1,9 +1,9 @@
 import mongoPlugin from './plugins/mongo';
 import authPlugin from './plugins/auth';
-import pingRoutes from './routes/ping.routes';
-import authRoutes from './routes/auth.routes';
-import userRoutes from './routes/user.routes';
-import linkRoutes from './routes/link.routes';
+import pingRoutes from './ping/ping.routes';
+import authRoutes from './auth/auth.routes';
+import userRoutes from './user/user.routes';
+import linkRoutes from './link/link.routes';
 
 import 'dotenv/config';
 import Fastify from 'fastify';

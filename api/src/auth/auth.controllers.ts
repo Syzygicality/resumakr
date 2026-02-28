@@ -1,6 +1,6 @@
 import { CallbackQuery, IdToken } from '../auth/auth.types';
 import { checkNewUser } from './auth.services';
-import { loginUrl, getTokens, logoutUrl } from '../helpers/auth.client';
+import { loginUrl, getTokens, logoutUrl } from '../utils/auth.client';
 
 import { FastifyReply, FastifyRequest } from 'fastify';
 import { jwtDecode } from "jwt-decode";

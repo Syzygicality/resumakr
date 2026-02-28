@@ -1,5 +1,5 @@
 import { retrieveUser } from "../user/user.services";
-import { HTTPError, http } from "../helpers/http";
+import { HTTPError, http } from "../utils/http";
 
 import { Db } from "mongodb";
 

@@ -1,14 +1,10 @@
 import { deleteUser, getManagementTokens } from "../helpers/auth.client";
-import { User, UserPatch } from "../user/user.types";
+import { User, UserPatch } from "./user.types";
 
 import { Db } from "mongodb";
 
 export async function retrieveUser(db: Db, sub: string) {
-    return await db.collection<User>("users").findOne({ _id: sub });
-}
-
-export async function retrieveUserAll(db: Db, sub: string) {
-    return await db.collection<User>("users").findOne({ _id: sub });
+    return await db.collection<User>("users").findOne({ _id: sub })!;
 }
 
 export async function updateUser(db: Db, sub: string, body: UserPatch) {

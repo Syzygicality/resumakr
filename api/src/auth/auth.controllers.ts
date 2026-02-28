@@ -1,5 +1,5 @@
 import { CallbackQuery, IdToken } from '../auth/auth.types';
-import { checkNewUser } from '../services/auth.services';
+import { checkNewUser } from './auth.services';
 import { loginUrl, getTokens, logoutUrl } from '../helpers/auth.client';
 
 import { FastifyReply, FastifyRequest } from 'fastify';

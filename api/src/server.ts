@@ -4,6 +4,7 @@ import pingRoutes from './ping/ping.routes';
 import authRoutes from './auth/auth.routes';
 import userRoutes from './user/user.routes';
 import linkRoutes from './link/link.routes';
+import keyRoutes from './key/key.routes';
 
 import 'dotenv/config';
 import Fastify from 'fastify';

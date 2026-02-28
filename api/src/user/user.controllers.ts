@@ -1,4 +1,4 @@
-import * as userService from '../services/user.services';
+import * as userService from './user.services';
 import { UserPatch } from './user.types';
 
 import { FastifyRequest, FastifyReply } from 'fastify';
@@ -8,7 +8,7 @@ export async function retrieveUser(request: FastifyRequest, reply: FastifyReply)
 }
 
 export async function retrieveUserAll(request: FastifyRequest, reply: FastifyReply) {
-    return reply.send(await userService.retrieveUserAll(request.server.mongo.db!, request.user.sub));
+    return reply.send(await userService.retrieveUser(request.server.mongo.db!, request.user.sub));
 }
 
 export async function updateUser(request: FastifyRequest<{ Body: UserPatch }>, reply: FastifyReply) {

@@ -1,5 +1,5 @@
 import * as userController from './user.controllers';
-import { mirrorSchema } from '../user/user.schemas';
+import { mirrorSchema } from './user.schemas';
 
 import { FastifyInstance } from 'fastify';
 

@@ -1,4 +1,4 @@
-import { callbackController, loginController, logoutController } from '../controllers/auth.controllers';
+import { callbackController, loginController, logoutController } from './auth.controllers';
 import { tokenSchema } from './auth.schemas';
 
 import { FastifyInstance } from 'fastify';

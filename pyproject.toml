@@ -1,0 +1,90 @@
+[project]
+name = "fastapi-hackplate"
+version = "0.1.0"
+description = "A FastAPI hackathon template for rapid development and deployment"
+readme = "README.md"
+requires-python = ">=3.13"
+dependencies = [
+    "aiosqlite>=0.22.1",
+    "fastapi>=0.135.2",
+    "httpx>=0.28.1",
+    "typer>=0.15.0",
+    "pydantic-settings>=2.13.1",
+    "pytest>=9.0.2",
+    "pytest-asyncio>=1.3.0",
+    "greenlet>=3.0.0",
+    "sqlalchemy>=2.0.49",
+    "sqlmodel>=0.0.38",
+    "uvicorn>=0.43.0",
+    "asyncpg>=0.31.0",
+    "beanie>=2.0.0",
+    "fastapi-users>=15.0.5",
+    "alembic>=1.14.0",
+    "python-keycloak>=7.1.1",
+    "auth0-python>=5.4.0",
+    "fastapi-cache2[redis]>=0.2.2",
+    "jinja2>=3.1.0",
+    "slowapi>=0.1.9",
+    "apscheduler>=3.10,<4.0",
+    "mcp==2.0.0",
+]
+
+[project.scripts]
+hackplate = "app.hackplate.cli:app"
+
+[build-system]
+requires = ["hatchling"]
+build-backend = "hatchling.build"
+
+[tool.uv]
+package = true
+
+[tool.hatch.build.targets.wheel]
+packages = ["app"]
+
+[tool.pytest.ini_options]
+asyncio_mode = "auto"
+asyncio_default_test_loop_scope = "session"
+asyncio_default_fixture_loop_scope = "session"
+
+[tool.hackplate]
+# The user model used by the auth plate. Must inherit from AbstractUser (SQL plates)
+# or AbstractUserDocument (mongo plate). Change this if you define a custom user model.
+auth_user_model = "app.hackplate.user.models.UserDocument"
+
+# Set to true to enable MCP boilerplate.
+mcp_server_enabled = false
+
+# Set to true to load Redis settings (REDIS_* env vars) onto the backend config.
+redis_enabled = false
+
+[tool.hackplate.db]
+# Set to true to manage schema with Alembic migrations.
+# When false, SQLModel creates tables automatically on startup (not recommended for production).
+alembic = false
+
+[tool.hackplate.cache]
+# Response caching (fastapi-cache2).
+# prefix: key namespace, mainly relevant when sharing a Redis instance.
+# expire: default TTL in seconds for @cache()-decorated routes that don't set their own.
+prefix = "hackplate-cache"
+expire = 60
+
+[tool.hackplate.ratelimit]
+# Rate limiting (slowapi).
+# ratelimiting_enabled: toggle enforcement without removing @limiter.limit decorators.
+# default_limits: global cap applied to every route, e.g. ["100/minute"] (empty = none).
+# key_prefix: key namespace, mainly relevant when sharing a Redis instance.
+ratelimiting_enabled = true
+default_limits = []
+key_prefix = "hackplate-ratelimit"
+
+[tool.hackplate.scheduler]
+# Task scheduling (APScheduler).
+# task_scheduling_enabled: start the scheduler on startup; when false, registered jobs never fire.
+# timezone: timezone used to interpret cron/interval triggers.
+# Register jobs with @scheduler.scheduled_job(...) or scheduler.add_job(...).
+task_scheduling_enabled = false
+timezone = "UTC"
+
+[tool.hackplate.auth]
